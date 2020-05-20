@@ -24,7 +24,7 @@ spring:
       generate-ddl: true
       show-sql: true
   datasource:
-    url: jdbc:mysql://172.17.0.2:3306/instagnam
+    url: jdbc:mysql://localhost:3306/instagnam
     username: asw
     password: asw
 
