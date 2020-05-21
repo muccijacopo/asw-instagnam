@@ -56,8 +56,3 @@ Per eseguire questo progetto:
 Alla fine, l'applicazione può essere arrestata usando lo script `stop-java-processes.sh` (**da usare con cautela!**). 
 
 Inoltre, *Consul* può essere arrestato con lo script `stop-consul.sh`. 
-
-
-## Descrizione delle attività da svolgere 
-
-Si veda il sito web del corso di [Architettura dei sistemi software](http://cabibbo.dia.uniroma3.it/asw/).
