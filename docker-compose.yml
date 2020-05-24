@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  ricette-db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: "ricette"
+      MYSQL_USER: "asw"
+      MYSQL_PASSWORD: "asw"
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      - instagnam-net
+  ricette:
+   build: "./ricette"
+   networks:
+     - instagnam-net
+   depends_on:
+     - consul
+
+  consul:
+    image: consul
+    ports:
+    - 8500:8500
+    networks:
+      - instagnam-net
+
+
+networks:
+  instagnam-net:
+    driver: bridge
