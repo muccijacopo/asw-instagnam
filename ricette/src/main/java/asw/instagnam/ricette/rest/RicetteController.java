@@ -27,14 +27,15 @@ public class RicetteController {
 
 	private final Logger logger = Logger.getLogger(RicetteController.class.toString()); 
 
-	/* Crea un nuovo ristorante. 
+	/* Crea un nuovo ristorante.
 	* la richiesta contiene nel corpo autore e titolo */ 
 	@PostMapping("/ricette")
 	public RicettaCompleta createRicetta(@RequestBody CreateRicettaRequest request) {
 		String autore = request.getAutore();
 		String titolo = request.getTitolo();
 		String preparazione = request.getPreparazione();
-		logger.info("REST CALL: createRicetta " + autore + ", " + titolo + ", " + preparazione); 
+		logger.info("REST CALL: TESTTT ");
+		logger.info("REST CALL: createRicetta " + autore + ", " + titolo + ", " + preparazione);
 		RicettaCompleta ricetta = ricetteService.createRicetta(autore, titolo, preparazione);
 		return ricetta; 
 	}	

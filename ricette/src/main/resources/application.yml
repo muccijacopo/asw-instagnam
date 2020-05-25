@@ -1,7 +1,7 @@
 # application.yml
---- 
-spring: 
-  application: 
+---
+spring:
+  application:
     name: ricette
   cloud:
     consul:
@@ -11,25 +11,38 @@ spring:
         instanceId: ${spring.application.name}-${spring.cloud.client.hostname}-${random.value}
         healthCheckPath: /actuator/health
         healthCheckInterval: 10s
+        # configurazione per effettuare esprimenti, NON USARE UN PRODUZIONE
+        # dopo quanto tempo consul deve smettere di restituire servizi che non rispondono all'health check?
         healthCheckCriticalTimeout: 60s
+        # consul deve restituire solo servizi che passano l'health check (default=false)
         queryPassing: true
     loadbalancer:
       ribbon.enabled: false
-  jpa:
-    hibernate:
-      ddl-auto: create
-      generate-ddl: true
-      show-sql: true
   datasource:
-    url: jdbc:mysql://ricette-db:3306/ricette
-    username: asw
-    password: asw
+    url: jdbc:mysql://ricette-db:3306/instagnam
+    username: asw-user
+    password: asw-user
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
 
-server: 
-  port: ${PORT:${SERVER_PORT:0}}
-#  port: 8080
+  main:
+    web-application-type: NONE
+  kafka:
+    bootstrap-servers: ${DOCKER_HOST_IP:10:11:1:121}:9092
+    producer:
+      name: Producer-ricette
+      messages-to-send: 10
+      out: asw.kafka.channel.ricette
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-# fa il logging dei comandi sql eseguiti 
-#spring.jpa.show-sql: true
+server:
+  # port: ${PORT:${SERVER_PORT:0}}
+  port: 8080
+
+# fa il logging dei comandi sql eseguiti
+# spring.jpa.show-sql: true
 # disable OSIV
-
+# spring.jpa.open-in-view: false

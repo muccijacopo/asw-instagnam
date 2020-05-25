@@ -14,7 +14,12 @@ public class RicetteService {
 	@Autowired
 	private RicetteRepository ricetteRepository;
 
- 	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
+	private final Logger logger = Logger.getLogger(RicetteService.class.toString());
+
+	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
+
+		logger.info("TEST");
+
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
 		return ricetta;
