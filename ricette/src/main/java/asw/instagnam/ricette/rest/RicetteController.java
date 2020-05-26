@@ -34,7 +34,6 @@ public class RicetteController {
 		String autore = request.getAutore();
 		String titolo = request.getTitolo();
 		String preparazione = request.getPreparazione();
-		logger.info("REST CALL: TESTTT ");
 		logger.info("REST CALL: createRicetta " + autore + ", " + titolo + ", " + preparazione);
 		RicettaCompleta ricetta = ricetteService.createRicetta(autore, titolo, preparazione);
 		return ricetta; 

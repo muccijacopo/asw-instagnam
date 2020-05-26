@@ -1,9 +1,7 @@
 package asw.instagnam.ricette.domain;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.logging.Logger; 
 import java.util.*; 
@@ -14,14 +12,18 @@ public class RicetteService {
 	@Autowired
 	private RicetteRepository ricetteRepository;
 
+	@Autowired
+	private SimpleMessagePublisher simpleMessagePublisher;
+
 	private final Logger logger = Logger.getLogger(RicetteService.class.toString());
 
 	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
-
-		logger.info("TEST");
-
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
+
+		logger.info("PUBLISHING MESSAGE: " + ricetta);
+		simpleMessagePublisher.publish("Ricetta completa inserita...");
+
 		return ricetta;
 	}
 
