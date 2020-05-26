@@ -30,6 +30,8 @@ services:
       - 7090:8080
     depends_on:
       - consul
+      - zookeeper
+      - kafka
     logging:
       driver: none
 
@@ -43,6 +45,8 @@ services:
     depends_on:
       - consul
       - ricette-db
+      - zookeeper
+      - kafka
     # logging:
     #   driver: none
 
@@ -70,6 +74,8 @@ services:
     depends_on:
       - consul
       - connessioni-db
+      - zookeeper
+      - kafka
     logging:
       driver: none
 
@@ -91,6 +97,8 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - 2181:2181
+#    logging:
+#      driver: none
   kafka:
     image: wurstmeister/kafka:latest
     depends_on:
@@ -103,3 +111,5 @@ services:
       KAFKA_CREATE_TOPICS: "asw.kafka.channel.ricette:1:1,asw.kafka.channel.connessioni:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+#    logging:
+#      driver: none
