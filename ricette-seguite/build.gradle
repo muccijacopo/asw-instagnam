@@ -27,7 +27,5 @@ dependencies {
 		exclude group: "org.springframework"
 	}
 
-	implementation 'org.springframework.kafka:spring-kafka'
-
 }
 
