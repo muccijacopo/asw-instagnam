@@ -19,7 +19,21 @@ spring:
         queryPassing: true
     loadbalancer:
       ribbon.enabled: false
+  kafka:
+    bootstrap-servers: asw-kafka:9092
+    consumer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
   # port: ${PORT:${SERVER_PORT:0}}
   port: 8080
+
+
+asw:
+  kafka:
+    channel:
+      in: ricette
+    groupid: ricette-seguite
+
+

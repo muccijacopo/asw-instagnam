@@ -22,7 +22,7 @@ public class RicetteService {
 		ricetta = ricetteRepository.save(ricetta);
 
 		logger.info("PUBLISHING MESSAGE: " + ricetta);
-		simpleMessagePublisher.publish("Ricetta completa inserita...");
+		simpleMessagePublisher.publish(titolo);
 
 		return ricetta;
 	}

@@ -27,19 +27,16 @@ spring:
     generate-ddl: true
     show-sql: true
   kafka:
-    bootstrap-servers: ${DOCKER_HOST_IP:10.11.1.121}:9092
+    bootstrap-servers: asw-kafka:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    main:
-      web-application-type: 'NONE'
+
 asw:
   kafka:
     channel:
-      out: asw.kafka.channel.ricette
-    producer:
-      messages-to-send: 10
-      name: Producer
+      out: ricette
+    groupid: ricette-producer
 
 server:
   # port: ${PORT:${SERVER_PORT:0}}
