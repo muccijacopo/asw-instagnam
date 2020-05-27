@@ -1,5 +1,12 @@
 # application.yml 
 ---
+asw:
+  kafka:
+    channel:
+      in: asw.channel.ricette
+    consumer:
+      name: Consumer
+    groupid: asw-consumer-ricette-seguite
 spring:
   application:
     name: ricette-seguite
@@ -20,20 +27,19 @@ spring:
     loadbalancer:
       ribbon.enabled: false
   kafka:
-    bootstrap-servers: asw-kafka:9092
+    bootstrap-servers: kafka:9092
     consumer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      auto-offset-reset: latest
+      group-id: ${asw.kafka.groupid}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      missing-topics-fatal: false
 
 server:
-  # port: ${PORT:${SERVER_PORT:0}}
   port: 8080
-
-
-asw:
-  kafka:
-    channel:
-      in: ricette
-    groupid: ricette-seguite
-
-

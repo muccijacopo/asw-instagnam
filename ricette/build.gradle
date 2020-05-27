@@ -13,10 +13,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+	implementation 'org.springframework.kafka:spring-kafka'
+
 	implementation 'org.springframework.cloud:spring-cloud-starter'
 	implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
 
-	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -27,8 +30,4 @@ dependencies {
 	implementation ("io.springfox:springfox-swagger-ui:${swaggerVersion}"){
 		exclude group: "org.springframework"
 	}
-
-	implementation 'mysql:mysql-connector-java'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 }

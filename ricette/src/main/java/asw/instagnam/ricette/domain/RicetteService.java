@@ -20,10 +20,8 @@ public class RicetteService {
 	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
-
-		logger.info("PUBLISHING MESSAGE: " + ricetta);
+		// Publish ricetta on channel
 		simpleMessagePublisher.publish(titolo);
-
 		return ricetta;
 	}
 

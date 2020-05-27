@@ -25,7 +25,6 @@ public class SimpleMessagePublisherImpl implements SimpleMessagePublisher {
     public void publish(String message) {
         logger.info("PUBLISHING MESSAGE: " + message + " ON CHANNEL: " + channel);
         template.send(channel, message);
-        // template.flush();
     }
 
 }
