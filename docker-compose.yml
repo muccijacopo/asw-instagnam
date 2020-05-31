@@ -33,8 +33,18 @@ services:
       - zookeeper
       - kafka
       - ricette
-#    logging:
-#      driver: none
+
+  ricette-seguite-db:
+    container_name: asw-ricette-seguite-db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: instagnam
+      MYSQL_USER: asw-user
+      MYSQL_PASSWORD: asw-user
 
   ricette:
     container_name: asw-ricette

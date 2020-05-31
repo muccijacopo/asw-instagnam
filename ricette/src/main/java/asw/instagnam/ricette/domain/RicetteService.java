@@ -1,5 +1,7 @@
 package asw.instagnam.ricette.domain;
 
+
+import asw.instagnam.common.api.event.*;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,15 +15,16 @@ public class RicetteService {
 	private RicetteRepository ricetteRepository;
 
 	@Autowired
-	private SimpleMessagePublisher simpleMessagePublisher;
+	private RicetteDomainEventPublisher eventPublisher;
 
 	private final Logger logger = Logger.getLogger(RicetteService.class.toString());
 
 	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
-		// Publish ricetta on channel
-		simpleMessagePublisher.publish(titolo);
+
+		DomainEvent event = new RicettaCreatedEvent(autore, titolo);
+		eventPublisher.publish(event);
 		return ricetta;
 	}
 
