@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class RicettaCreatedEvent implements DomainEvent {
+    private Long id;
     private String autore;
     private String titolo;
 

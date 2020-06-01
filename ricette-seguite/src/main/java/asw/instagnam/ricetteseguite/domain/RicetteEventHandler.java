@@ -15,7 +15,9 @@ public class RicetteEventHandler {
     private String consumerName;
 
     public void onEvent(RicettaCreatedEvent rce) {
-        String eventLog = String.format("RECEIVED RICETTA: ", rce.getTitolo());
+        String titoloRicetta = rce.getTitolo();
+        System.out.println("RECEIVED RICETTA: " + titoloRicetta);
+        String eventLog = String.format("RECEIVED RICETTA: ", titoloRicetta);
         logger.info(eventLog);
     }
 

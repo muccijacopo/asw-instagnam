@@ -24,7 +24,6 @@ public class RicetteDomainEventPublisherImpl implements RicetteDomainEventPublis
 
     @Override
     public void publish(DomainEvent event) {
-        logger.info("message");
         template.send(channel, event);
     }
 

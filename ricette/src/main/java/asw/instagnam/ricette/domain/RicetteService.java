@@ -23,7 +23,7 @@ public class RicetteService {
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
 
-		DomainEvent event = new RicettaCreatedEvent(autore, titolo);
+		DomainEvent event = new RicettaCreatedEvent(ricetta.getId(), ricetta.getAutore(), ricetta.getTitolo());
 		eventPublisher.publish(event);
 		return ricetta;
 	}
