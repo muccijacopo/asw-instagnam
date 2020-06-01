@@ -28,7 +28,7 @@ public class RicettaCreatedEventListener {
     @Autowired
     private RicetteEventHandler ricetteEventHandler;
 
-    @KafkaListener(topics = "${asw.kafka.channel.in}", groupId="${asw.kafka.groupid}")
+    @KafkaListener(topics = "${asw.kafka.channel.in}", groupId = "${asw.kafka.groupid}")
     public void listen(ConsumerRecord<String, DomainEvent> record) throws Exception {
         DomainEvent event = record.value();
         if(event.getClass().equals(RicettaCreatedEvent.class)) {

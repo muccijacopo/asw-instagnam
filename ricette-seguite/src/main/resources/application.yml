@@ -26,6 +26,14 @@ spring:
         queryPassing: true
     loadbalancer:
       ribbon.enabled: false
+  datasource:
+    url: jdbc:mysql://ricette-seguite-db:3308/instagnam
+    username: asw-user
+    password: asw-user
+    jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: true
   kafka:
     bootstrap-servers: kafka:9092
     consumer:
