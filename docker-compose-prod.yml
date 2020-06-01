@@ -1,33 +1,25 @@
 version: '3.3'
-services:
 
+services:
   consul:
     container_name: asw-consul
     image: consul
     ports:
       - 8500:8500
-    logging:
-      driver: none
 
   apigateway:
     container_name: asw-apigateway
-    build:
-      context: api-gateway
-      dockerfile: Dockerfile
+    image: muccijacopo/asw-api-gateway
     ports:
       - 8080:8080
     depends_on:
       - consul
-    logging:
-      driver: none
 
   ricette-seguite:
     container_name: asw-ricette-seguite
     deploy:
       replicas: 4
-    build:
-      context: ricette-seguite
-      dockerfile: Dockerfile
+    image: muccijacopo/asw-ricette-seguite
     ports:
       - 7090:8080
     depends_on:
@@ -49,23 +41,14 @@ services:
       MYSQL_DATABASE: instagnam
       MYSQL_USER: asw-user
       MYSQL_PASSWORD: asw-user
-    # logging:
-    #   driver: none
 
   ricette:
     container_name: asw-ricette
-    build:
-      context: ricette
-      dockerfile: Dockerfile
+    image: muccijacopo/asw-ricette
     ports:
       - 7070:8080
-    depends_on:
-      - consul
-      - ricette-db
-      - zookeeper
-      - kafka
-    # logging:
-    #   driver: none
+    deploy:
+      replicas: 4
 
   ricette-db:
     container_name: asw-ricette-db
@@ -83,9 +66,7 @@ services:
 
   connessioni:
     container_name: asw-connessioni
-    build:
-      context: connessioni
-      dockerfile: Dockerfile
+    image: muccijacopo/asw-connessioni
     ports:
       - 7080:8080
     depends_on:
@@ -93,8 +74,6 @@ services:
       - connessioni-db
       - zookeeper
       - kafka
-    logging:
-      driver: none
 
   connessioni-db:
     container_name: asw-connessioni-db
@@ -107,8 +86,6 @@ services:
       MYSQL_DATABASE: instagnam
       MYSQL_USER: asw-user
       MYSQL_PASSWORD: asw-user
-    logging:
-      driver: none
 
   zookeeper:
     container_name: asw-zookeeper
@@ -123,12 +100,13 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 9092:9092
+      - target: 9092
+        published: 9092
+        protocol: tcp
+        mode: host
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "asw.channel.ricette:1:1,asw.channel.connessioni:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    logging:
-      driver: none
