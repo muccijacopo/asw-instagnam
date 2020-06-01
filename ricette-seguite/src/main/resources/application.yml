@@ -2,8 +2,11 @@
 ---
 asw:
   kafka:
-    channel:
-      in: asw.channel.ricette
+    channels:
+      ricette:
+        in: asw.channel.ricette
+      connessioni:
+        in: asw.channel.connessioni
     consumer:
       name: Consumer
     groupid: asw-consumer-ricette-seguite
