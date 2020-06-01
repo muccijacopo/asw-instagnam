@@ -1,9 +1,24 @@
 package asw.instagnam.ricetteseguite.domain;
 
-import java.util.*; 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface RicetteService {
+import java.util.*;
 
-	public Collection<Ricetta> getRicetteByAutore(String autore); 
+@Service
+public class RicetteService {
+
+	@Autowired
+	private RicetteRepository ricetteRepository;
+
+    public Collection<Ricetta> getRicetteByAutore(String autore) {
+    	return null;
+	}
+
+	public Ricetta saveRicetta(Long id, String titolo, String autore) {
+		Ricetta ricetta = new Ricetta(id, titolo, autore);
+		System.out.println("Titolo: " + ricetta.getTitolo());
+		return this.ricetteRepository.save(ricetta);
+	}
 	
 }

@@ -14,6 +14,7 @@ public class RicetteSeguiteService {
 	@Autowired 
 	private RicetteService ricetteService;
 
+
 	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
 	public Collection<Ricetta> getRicetteSeguite(String utente) {
 		Collection<Ricetta> ricette = new ArrayList<>(); 

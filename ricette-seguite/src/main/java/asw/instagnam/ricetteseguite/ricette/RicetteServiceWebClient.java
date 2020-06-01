@@ -16,7 +16,7 @@ import java.util.*;
 
 @Service 
 @Primary 
-public class RicetteServiceWebClient implements RicetteService {
+public class RicetteServiceWebClient {
 
 	@Autowired 
 	@Qualifier("loadBalancedWebClient")
