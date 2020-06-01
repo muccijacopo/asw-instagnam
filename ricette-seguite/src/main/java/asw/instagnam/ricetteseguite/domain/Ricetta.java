@@ -13,9 +13,10 @@ import javax.persistence.Table;
 public class Ricetta {
 
 	@Id
-	private Long id; 
-	private String autore; 
+	private Long id;
+
 	private String titolo;
+	private String autore; 
 
 	public Ricetta(Long id, String autore, String titolo) {
 		this();

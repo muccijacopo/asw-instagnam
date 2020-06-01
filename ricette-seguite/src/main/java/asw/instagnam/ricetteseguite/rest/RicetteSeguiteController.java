@@ -26,9 +26,9 @@ public class RicetteSeguiteController {
 
 	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
 	@GetMapping("/ricetteseguite/{utente}")
-	public Collection<Ricetta> getRicetteSeguite(@PathVariable String utente) {
+	public Collection<RicettaSeguita> getRicetteSeguite(@PathVariable String utente) {
 		logger.info("REST CALL: getRicetteSeguite " + utente); 
-		Collection<Ricetta> ricette = ricetteSeguiteService.getRicetteSeguite(utente); 
+		Collection<RicettaSeguita> ricette = ricetteSeguiteService.getRicetteSeguite(utente);
 		logger.info("getRicetteSeguite(): " + ricette);
 		return ricette; 
 	}

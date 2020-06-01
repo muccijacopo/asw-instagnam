@@ -40,7 +40,7 @@ spring:
   kafka:
     bootstrap-servers: kafka:9092
     consumer:
-      auto-offset-reset: latest
+      auto-offset-reset: earliest
       group-id: ${asw.kafka.groupid}
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
