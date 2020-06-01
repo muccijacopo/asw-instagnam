@@ -5,6 +5,7 @@ import asw.instagnam.common.api.event.DomainEvent;
 import asw.instagnam.common.api.event.RicettaCreatedEvent;
 import asw.instagnam.common.api.event.ConnessioneCreatedEvent;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.logging.Logger;
 public class EventHandler {
 
     private final Logger logger = Logger.getLogger(EventHandler.class.toString());
+    @Autowired
+    private RicetteService ricetteService;
 
     @Value("${asw.kafka.consumer.name}")
     private String consumerName;
@@ -34,6 +37,7 @@ public class EventHandler {
 
     private void createRicetta(RicettaCreatedEvent event) {
         logger.info("RECEIVED RICETTA: " + event.getTitolo());
+        ricetteService.saveRicetta(event.getId(), event.getTitolo(), event.getAutore());
     }
 
     private void createConnessione(ConnessioneCreatedEvent event) {

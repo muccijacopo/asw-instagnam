@@ -33,10 +33,10 @@ spring:
     url: jdbc:mysql://ricette-seguite-db:3306/instagnam
     username: asw-user
     password: asw-user
-    jpa:
-      hibernate.ddl-auto: update
-      generate-ddl: true
-      show-sql: true
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true
   kafka:
     bootstrap-servers: kafka:9092
     consumer:
