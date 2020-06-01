@@ -27,7 +27,7 @@ spring:
     loadbalancer:
       ribbon.enabled: false
   datasource:
-    url: jdbc:mysql://ricette-seguite-db:3308/instagnam
+    url: jdbc:mysql://ricette-seguite-db:3306/instagnam
     username: asw-user
     password: asw-user
     jpa:

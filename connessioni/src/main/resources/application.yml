@@ -1,5 +1,9 @@
 # application.yml
 ---
+asw:
+  kafka:
+    channel:
+      out: asw.channel.connessioni
 spring:
   application:
     name: connessioni
@@ -26,12 +30,13 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+  kafka:
+    bootstrap-servers: kafka:9092
+    listener:
+      missing-topics-fatal: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
-  # port: ${PORT:${SERVER_PORT:0}}
   port: 8080
-
-# fa il logging dei comandi sql eseguiti
-# spring.jpa.show-sql: true
-# disable OSIV
-# spring.jpa.open-in-view: false

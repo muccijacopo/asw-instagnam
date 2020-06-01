@@ -34,6 +34,7 @@ services:
       - zookeeper
       - kafka
       - ricette
+      - connessioni
 
   ricette-seguite-db:
     container_name: asw-ricette-seguite-db
@@ -46,6 +47,8 @@ services:
       MYSQL_DATABASE: instagnam
       MYSQL_USER: asw-user
       MYSQL_PASSWORD: asw-user
+    # logging:
+    #   driver: none
 
   ricette:
     container_name: asw-ricette
