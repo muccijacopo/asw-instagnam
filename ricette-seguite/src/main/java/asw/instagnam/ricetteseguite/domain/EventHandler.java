@@ -17,6 +17,8 @@ public class EventHandler {
     private final Logger logger = Logger.getLogger(EventHandler.class.toString());
     @Autowired
     private RicetteService ricetteService;
+    @Autowired
+    private ConnessioniService connessioniService;
 
     @Value("${asw.kafka.consumer.name}")
     private String consumerName;
@@ -42,6 +44,7 @@ public class EventHandler {
 
     private void createConnessione(ConnessioneCreatedEvent event) {
         logger.info("RECEIVED CONNESSIONE: " + event.getFollower());
+        connessioniService.saveConnessione(event.getId(), event.getFollowed(), event.getFollower());
     }
 
 }
