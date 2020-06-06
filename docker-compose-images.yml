@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+
+  apigateway:
+    build: ./api-gateway
+    image: adelloste/instagnam-apigateway-kube:2020.0.0.2
+
+  ricette-seguite:
+    build: ./ricette-seguite
+    image: adelloste/instagnam-ricette-seguite-kube:2020.0.0.1
+
+  ricette:
+    build: ./ricette
+    image: adelloste/instagnam-ricette-kube:2020.0.0.1
+
+  connessioni:
+    build: ./connessioni
+    image: adelloste/instagnam-connessioni-kube:2020.0.0.1
