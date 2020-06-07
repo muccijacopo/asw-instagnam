@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: zookeeper
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -27,6 +28,7 @@ kind: Deployment
 metadata:
   name: kafka
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -58,8 +60,34 @@ spec:
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
+  name: apigateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: instagnam
+      service: apigateway
+  template:
+    metadata:
+      labels:
+        app: instagnam
+        service: apigateway
+    spec:
+      containers:
+        - image: adelloste/instagnam-apigateway-kube:2020.0.0.2
+          name: asw-apigateway
+          ports:
+            - containerPort: 8080
+              name: apigateway
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
   name: ricette
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -82,8 +110,72 @@ spec:
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
+  name: connessioni
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: instagnam
+      service: connessioni
+  template:
+    metadata:
+      labels:
+        app: instagnam
+        service: connessioni
+    spec:
+      containers:
+        - image: adelloste/instagnam-connessioni-kube:2020.0.0.2
+          name: asw-connessioni
+          ports:
+            - containerPort: 8080
+              name: connessioni
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: connessioni-db
+spec:
+  selector:
+    matchLabels:
+      app: instagnam
+      service: connessioni-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: instagnam
+        service: connessioni-db
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: asw-connessioni-db
+          env:
+            # Use secret in real usage
+            - name: MYSQL_ROOT_USER
+              value: root
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE
+              value: instagnam
+            - name: MYSQL_USER
+              value: asw-user
+            - name: MYSQL_PASSWORD
+              value: asw-user
+          ports:
+            - containerPort: 3306
+              name: connessioni-db
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
   name: ricette-seguite
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -182,21 +274,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: apigateway
+spec:
+  selector:
+    app: instagnam
+    service: apigateway
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
   name: zookeeper
 spec:
   selector:
     app: instagnam
     service: zookeeper
   ports:
-    - name: client
+    - protocol: TCP
       port: 2181
-      protocol: TCP
-    - name: follower
-      port: 2888
-      protocol: TCP
-    - name: leader
-      port: 3888
-      protocol: TCP
+      targetPort: 2181
 
 ---
 
@@ -212,7 +313,6 @@ spec:
     - protocol: TCP
       port: 9092
       targetPort: 9092
-  clusterIP: None
 
 ---
 
@@ -228,6 +328,37 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: connessioni
+spec:
+  selector:
+    app: instagnam
+    service: connessioni
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: connessioni-db
+spec:
+  selector:
+    app: instagnam
+    service: connessioni-db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  clusterIP: None
 
 ---
 
@@ -276,19 +407,18 @@ spec:
       targetPort: 3306
   clusterIP: None
 
+---
 
-#---
-#
-#kind: Ingress
-#apiVersion: extensions/v1beta1
-#metadata:
-#  name: instagnam
-#spec:
-#  rules:
-#    - host: instagnam
-#      http:
-#        paths:
-#          - path: /
-#            backend:
-#              serviceName: apigateway
-#              servicePort: 8080
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: instagnam
+spec:
+  rules:
+    - host: instagnam
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: apigateway
+              servicePort: 8080
