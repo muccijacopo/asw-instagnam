@@ -14,19 +14,19 @@ spring:
         - id: ricette_seguite_route
           uri: http://ricette-seguite:8080
           predicates:
-            - Path=/
+            - Path=/ricette-seguite
           filters:
             - SetPath=/
         - id: ricette_route
           uri: http://ricette:8080
           predicates:
-            - Path=/
+            - Path=/ricette
           filters:
             - SetPath=/
         - id: connessioni_route
           uri: http://connessioni:8080
           predicates:
-            - Path=/
+            - Path=/connessioni
           filters:
             - SetPath=/
 
