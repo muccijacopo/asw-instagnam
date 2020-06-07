@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instagnam
+      service: apigateway
+  template:
+    metadata:
+      labels:
+        app: instagnam
+        service: apigateway
+    spec:
+      containers:
+        - name: asw-instagnam-apigateway
+          image: adelloste/instagnam-apigateway-kube:2020.0.0.1
+          ports:
+            - containerPort: 8080
+
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: ricette
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: instagnam
+#      service: ricette
+#  template:
+#    metadata:
+#      labels:
+#        app: instagnam
+#        service: ricette
+#    spec:
+#      containers:
+#        - name: asw-instagnam-ricette
+#          image: adelloste/instagnam-ricette-kube:2020.0.0.1
+#          ports:
+#            - containerPort: 8080
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8080
+#            initialDelaySeconds: 10
+#            periodSeconds: 10
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apigateway
+spec:
+  selector:
+    app: instagnam
+    service: apigateway
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+#---
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: ricette
+#spec:
+#  selector:
+#    app: instagnam
+#    service: ricette
+#  ports:
+#    - protocol: TCP
+#      port: 8080
+#      targetPort: 8080
+
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: instagnam
+spec:
+  rules:
+    - host: instagnam
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: apigateway
+              servicePort: 8080
