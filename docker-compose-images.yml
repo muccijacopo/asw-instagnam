@@ -3,7 +3,7 @@ services:
 
   apigateway:
     build: ./api-gateway
-    image: adelloste/instagnam-apigateway-kube:2020.0.0.2
+    image: adelloste/instagnam-apigateway-kube:2020.0.0.3
 
   ricette-seguite:
     build: ./ricette-seguite
