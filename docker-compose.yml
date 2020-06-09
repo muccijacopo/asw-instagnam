@@ -23,8 +23,6 @@ services:
 
   ricette-seguite:
     container_name: asw-ricette-seguite
-    deploy:
-      replicas: 4
     build:
       context: ricette-seguite
       dockerfile: Dockerfile
@@ -70,6 +68,8 @@ services:
   ricette-db:
     container_name: asw-ricette-db
     image: mysql:5.7
+    volumes:
+      - "$PWD/ricette/init:/docker-entrypoint-initdb.d"
     ports:
       - 3306:3306
     environment:

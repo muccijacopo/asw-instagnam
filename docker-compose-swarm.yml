@@ -2,13 +2,11 @@ version: '3.3'
 
 services:
   consul:
-    container_name: asw-consul
     image: consul
     ports:
       - 8500:8500
 
   apigateway:
-    container_name: asw-apigateway
     image: muccijacopo/asw-api-gateway
     ports:
       - 8080:8080
@@ -16,7 +14,6 @@ services:
       - consul
 
   ricette-seguite:
-    container_name: asw-ricette-seguite
     deploy:
       replicas: 4
     image: muccijacopo/asw-ricette-seguite
@@ -31,7 +28,6 @@ services:
       - connessioni
 
   ricette-seguite-db:
-    container_name: asw-ricette-seguite-db
     image: mysql:5.7
     ports:
       - 3308:3306
@@ -43,7 +39,6 @@ services:
       MYSQL_PASSWORD: asw-user
 
   ricette:
-    container_name: asw-ricette
     image: muccijacopo/asw-ricette
     ports:
       - 7070:8080
@@ -51,7 +46,6 @@ services:
       replicas: 4
 
   ricette-db:
-    container_name: asw-ricette-db
     image: mysql:5.7
     ports:
       - 3306:3306
@@ -65,7 +59,6 @@ services:
       driver: none
 
   connessioni:
-    container_name: asw-connessioni
     image: muccijacopo/asw-connessioni
     ports:
       - 7080:8080
@@ -76,7 +69,6 @@ services:
       - kafka
 
   connessioni-db:
-    container_name: asw-connessioni-db
     image: mysql:5.7
     ports:
       - 3307:3306
@@ -88,14 +80,12 @@ services:
       MYSQL_PASSWORD: asw-user
 
   zookeeper:
-    container_name: asw-zookeeper
     image: wurstmeister/zookeeper
     ports:
       - 2181:2181
     logging:
       driver: none
   kafka:
-    container_name: asw-kafka
     image: wurstmeister/kafka
     depends_on:
       - zookeeper
