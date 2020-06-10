@@ -2,7 +2,7 @@
 
 Progetto del corso di Analisi e progettazione del software per l'anno accademico 2019-2020. 
 
-## Table of contents
+## Sommario
 
 * [Descrizione](#descrizione)
 * [Utilizzo](#utilizzo)
@@ -61,11 +61,12 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
   
   * eseguire 
 
-* Eseguire i diversi servizi in contenitori Docker, usando *Kubernetes*.
+* Eseguire i diversi servizi in contenitori Docker, usando *Kubernetes*
   Operazioni:
   
   *  eseguire il comando `git checkout kubernetes`
   *  eseguire lo script `deploy-kubes.sh`
-  *  eseguire lo script `deploy-kubes.sh` per visualizzare le risorse create (namespace, pod,svc, ingress)
-  *  eseguire lo script `deploy-kubes.sh` per eliminare le risorse precedentemente create (namespace, pod,svc, ingress)
+  *  eseguire lo script `deploy-kubes.sh` per visualizzare le risorse create (namespace, pod, svc, ingress)
+  *  eseguire lo script `deploy-kubes.sh` per eliminare le risorse precedentemente create (namespace, pod, svc, ingress)
+  *  eseguire il comando `minikube dashboard` per visualizzare le risorse create in modo semplificato
 
