@@ -7,7 +7,7 @@ services:
       - 8500:8500
 
   apigateway:
-    image: muccijacopo/asw-api-gateway
+    image: muccijacopo/asw-instagnam-api-gateway
     ports:
       - 8080:8080
     depends_on:
@@ -16,7 +16,7 @@ services:
   ricette-seguite:
     deploy:
       replicas: 4
-    image: muccijacopo/asw-ricette-seguite
+    image: muccijacopo/asw-instagnam-ricette-seguite
     ports:
       - 7090:8080
     depends_on:
@@ -39,11 +39,16 @@ services:
       MYSQL_PASSWORD: asw-user
 
   ricette:
-    image: muccijacopo/asw-ricette
+    image: muccijacopo/asw-instagnam-ricette
     ports:
       - 7070:8080
     deploy:
       replicas: 4
+    depends_on:
+      - consul
+      - ricette-db
+      - kafka
+      - zookeeper
 
   ricette-db:
     image: mysql:5.7
@@ -59,7 +64,7 @@ services:
       driver: none
 
   connessioni:
-    image: muccijacopo/asw-connessioni
+    image: muccijacopo/asw-instagnam-connessioni
     ports:
       - 7080:8080
     depends_on:

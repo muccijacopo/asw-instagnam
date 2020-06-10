@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+
+  apigateway:
+    build: ./api-gateway
+    image: muccijacopo/asw-instagnam-api-gateway
+
+  ricette-seguite:
+    build: ./ricette-seguite
+    image: muccijacopo/asw-instagnam-ricette-seguite
+
+  ricette:
+    build: ./ricette
+    image: muccijacopo/asw-instagnam-ricette
+
+  connessioni:
+    build: ./connessioni
+    image: muccijacopo/asw-instagnam-connessioni
