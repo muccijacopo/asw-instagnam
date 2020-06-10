@@ -2,8 +2,12 @@
 
 Progetto del corso di Analisi e progettazione del software per l'anno accademico 2019-2020. 
 
+## Table of contents
 
-## Descrizione di questo progetto 
+* [Descrizione](#descrizione)
+* [Utilizzo](#utilizzo)
+
+## Descrizione 
 
 Questo progetto contiene il il codice di *Instagnam*, un semplice social-network per la condivisione di ricette di cucina. 
 Gli utenti del sistema possono pubblicare delle ricette. 
@@ -45,14 +49,23 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
   in modo da trovare, complessivamente, le ricette degli autori nell'insieme degli utenti AA seguiti da U 
 
 
-## Esecuzione 
+## Utilizzo 
 
-Per eseguire questo progetto: 
+* Eseguire i diversi servizi in contenitori Docker, usando *Docker Compose*.
+  Operazioni:
+  
+  * eseguire lo script `deploy.sh`
+  
+* Eseguire i diversi servizi in contenitori Docker in *swarm mode*.
+  Operazioni:
+  
+  * eseguire 
 
-* avviare *Consul* eseguendo lo script `start-consul.sh` 
+* Eseguire i diversi servizi in contenitori Docker, usando *Kubernetes*.
+  Operazioni:
+  
+  *  eseguire il comando `git checkout kubernetes`
+  *  eseguire lo script `deploy-kubes.sh`
+  *  eseguire lo script `deploy-kubes.sh` per visualizzare le risorse create (namespace, pod,svc, ingress)
+  *  eseguire lo script `deploy-kubes.sh` per eliminare le risorse precedentemente create (namespace, pod,svc, ingress)
 
-* per avviare l'applicazione *Instagnam*, eseguire lo script `run-instagnam.sh` 
-
-Alla fine, l'applicazione può essere arrestata usando lo script `stop-java-processes.sh` (**da usare con cautela!**). 
-
-Inoltre, *Consul* può essere arrestato con lo script `stop-consul.sh`. 
