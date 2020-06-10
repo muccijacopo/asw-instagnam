@@ -54,12 +54,13 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
 * Eseguire i diversi servizi in contenitori Docker, usando *Docker Compose*.
   Operazioni:
   
-  * eseguire lo script `deploy.sh`
+  *  eseguire il comando `git checkout master`
+  *  eseguire lo script `deploy.sh`
   
 * Eseguire i diversi servizi in contenitori Docker in *swarm mode*.
   Operazioni:
   
-  * eseguire 
+  *  eseguire 
 
 * Eseguire i diversi servizi in contenitori Docker, usando *Kubernetes*
   Operazioni:
