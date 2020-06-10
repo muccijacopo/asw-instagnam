@@ -23,8 +23,6 @@ services:
 
   ricette-seguite:
     container_name: asw-ricette-seguite
-    deploy:
-      replicas: 4
     build:
       context: ricette-seguite
       dockerfile: Dockerfile
@@ -37,6 +35,8 @@ services:
       - kafka
       - ricette
       - connessioni
+    logging:
+      driver: none
 
   ricette-seguite-db:
     container_name: asw-ricette-seguite-db
@@ -49,8 +49,8 @@ services:
       MYSQL_DATABASE: instagnam
       MYSQL_USER: asw-user
       MYSQL_PASSWORD: asw-user
-    # logging:
-    #   driver: none
+    logging:
+      driver: none
 
   ricette:
     container_name: asw-ricette
@@ -64,12 +64,14 @@ services:
       - ricette-db
       - zookeeper
       - kafka
-    # logging:
-    #   driver: none
+    logging:
+      driver: none
 
   ricette-db:
     container_name: asw-ricette-db
     image: mysql:5.7
+    volumes:
+      - "$PWD/ricette/init:/docker-entrypoint-initdb.d"
     ports:
       - 3306:3306
     environment:
@@ -99,6 +101,8 @@ services:
   connessioni-db:
     container_name: asw-connessioni-db
     image: mysql:5.7
+    volumes:
+      - "$PWD/connessioni/init:/docker-entrypoint-initdb.d"
     ports:
       - 3307:3306
     environment:
