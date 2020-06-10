@@ -60,7 +60,8 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
 * Eseguire i diversi servizi in contenitori Docker in *swarm mode*.
   Operazioni:
   
-  *  eseguire 
+  *  eseguire lo script `deploy-swarm.sh`
+  *  eseguire lo script `stop-swarm.sh`
 
 * Eseguire i diversi servizi in contenitori Docker, usando *Kubernetes*
   Operazioni:
