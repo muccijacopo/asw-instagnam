@@ -7,12 +7,12 @@ services:
 
   ricette-seguite:
     build: ./ricette-seguite
-    image: adelloste/instagnam-ricette-seguite-kube:2020.0.0.2
+    image: adelloste/instagnam-ricette-seguite-kube:2020.0.0.3
 
   ricette:
     build: ./ricette
-    image: adelloste/instagnam-ricette-kube:2020.0.0.2
+    image: adelloste/instagnam-ricette-kube:2020.0.0.3
 
   connessioni:
     build: ./connessioni
-    image: adelloste/instagnam-connessioni-kube:2020.0.0.2
+    image: adelloste/instagnam-connessioni-kube:2020.0.0.3

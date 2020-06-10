@@ -3,7 +3,7 @@
 CURPATH=$(pwd)
 
 echo "delete all pods and services in namespace instagnam-ns"
-kubectl -n instagnam-ns delete pod,svc --all
+kubectl delete all --all -n instagnam-ns
 
-echo "destroy resources"
+echo "destroy namespace instagnam-ns"
 kubectl delete namespace instagnam-ns

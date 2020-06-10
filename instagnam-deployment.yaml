@@ -87,7 +87,7 @@ kind: Deployment
 metadata:
   name: ricette
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -99,7 +99,7 @@ spec:
         service: ricette
     spec:
       containers:
-        - image: adelloste/instagnam-ricette-kube:2020.0.0.2
+        - image: adelloste/instagnam-ricette-kube:2020.0.0.3
           name: asw-ricette
           ports:
             - containerPort: 8080
@@ -112,7 +112,7 @@ kind: Deployment
 metadata:
   name: connessioni
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -124,7 +124,7 @@ spec:
         service: connessioni
     spec:
       containers:
-        - image: adelloste/instagnam-connessioni-kube:2020.0.0.2
+        - image: adelloste/instagnam-connessioni-kube:2020.0.0.3
           name: asw-connessioni
           ports:
             - containerPort: 8080
@@ -175,7 +175,7 @@ kind: Deployment
 metadata:
   name: ricette-seguite
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: instagnam
@@ -187,7 +187,7 @@ spec:
         service: ricette-seguite
     spec:
       containers:
-        - image: adelloste/instagnam-ricette-seguite-kube:2020.0.0.2
+        - image: adelloste/instagnam-ricette-seguite-kube:2020.0.0.3
           name: asw-ricette-seguite
           ports:
             - containerPort: 8080
