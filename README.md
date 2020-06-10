@@ -60,6 +60,7 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
 * Eseguire i diversi servizi in contenitori Docker in *swarm mode*.
   Operazioni:
   
+  *  eseguire il comando `git checkout master`
   *  eseguire lo script `deploy-swarm.sh`
   *  eseguire lo script `stop-swarm.sh`
 
