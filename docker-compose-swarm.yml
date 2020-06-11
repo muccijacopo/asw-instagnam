@@ -15,7 +15,7 @@ services:
 
   ricette-seguite:
     deploy:
-      replicas: 2
+      replicas: 1
     image: muccijacopo/asw-instagnam-ricette-seguite
     ports:
       - 7090:8080
@@ -43,7 +43,7 @@ services:
     ports:
       - 7070:8080
     deploy:
-      replicas: 4
+      replicas: 1
     depends_on:
       - consul
       - ricette-db
@@ -68,7 +68,7 @@ services:
     ports:
       - 7080:8080
     deploy:
-      replicas: 4
+      replicas: 1
     depends_on:
       - consul
       - connessioni-db

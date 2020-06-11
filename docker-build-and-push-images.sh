@@ -10,6 +10,8 @@ fi
 
 echo "building containers"
 docker-compose -f docker-compose-images.yml build
+#docker-compose -f docker-compose-swarm-images.yml build
 
 echo "pushing containers"
 docker-compose -f docker-compose-images.yml push
+#docker-compose -f docker-compose-swarm-images.yml push

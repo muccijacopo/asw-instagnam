@@ -19,7 +19,7 @@ spring:
         # dopo quanto tempo consul deve smettere di restituire servizi che non rispondono all'health check?
 #        healthCheckCriticalTimeout: 60s
         # consul deve restituire solo servizi che passano l'health check (default=false)
-        queryPassing: true
+        queryPassing: false
     loadbalancer:
       ribbon.enabled: false
   datasource:
